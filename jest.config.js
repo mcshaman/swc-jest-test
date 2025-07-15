@@ -2,10 +2,10 @@
 const config = {
 	testEnvironment: "node",
 	collectCoverageFrom: ["src/**/*.ts"],
-	coverageReporters: ["text", "lcov", "html"],
+	coverageReporters: ["text", "text-summary", "html"],
 	transform: {
-		"^.+\\.ts$": "babel-jest",
-	}
+		"^.+\\.ts$": "@swc/jest",
+	},
 };
 
 module.exports = config;
