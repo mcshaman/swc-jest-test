@@ -2,8 +2,54 @@
  * Module demonstrating various code patterns for coverage testing
  */
 
+interface User {
+	name: string;
+	email: string;
+	age: number;
+	isAuthenticated?: boolean;
+}
+
+interface UserProfile {
+	id: string;
+	name: string;
+	email: string;
+	age: number;
+	preferences: Record<string, any>;
+	createdAt: Date;
+	subscribedToNewsletter?: boolean;
+	marketingConsent?: boolean;
+	isAdult?: boolean;
+	isMinor?: boolean;
+	requiresParentalConsent?: boolean;
+}
+
+interface ValidationResult {
+	valid: boolean;
+	error?: string;
+	user?: User;
+}
+
+interface PaymentResult {
+	success: boolean;
+	method: string;
+	amount: number;
+}
+
+interface ProcessNumbersResult {
+	original: any[];
+	filtered: number[];
+	doubled: number[];
+	sum: number;
+	count: number;
+}
+
+interface UserPreferences {
+	newsletter?: boolean;
+	marketing?: boolean;
+}
+
 // Const function declaration
-const multiply = (a, b) => {
+export const multiply = (a: number, b: number): number => {
 	if (typeof a !== 'number' || typeof b !== 'number') {
 		throw new Error('Both arguments must be numbers');
 	}
@@ -11,7 +57,7 @@ const multiply = (a, b) => {
 };
 
 // Anonymous function assigned to const
-const divide = function(a, b) {
+export const divide = function(a: number, b: number): number {
 	if (typeof a !== 'number' || typeof b !== 'number') {
 		throw new Error('Both arguments must be numbers');
 	}
@@ -22,7 +68,7 @@ const divide = function(a, b) {
 };
 
 // Function with multiple branches and complex logic
-const gradeCalculator = (score) => {
+export const gradeCalculator = (score: number): string => {
 	if (typeof score !== 'number') {
 		throw new Error('Score must be a number');
 	}
@@ -45,7 +91,7 @@ const gradeCalculator = (score) => {
 };
 
 // Function with nested conditions and early returns
-const validateUser = (user) => {
+export const validateUser = (user: User | null): ValidationResult => {
 	if (!user) {
 		return { valid: false, error: 'User object is required' };
 	}
@@ -74,7 +120,7 @@ const validateUser = (user) => {
 };
 
 // Function with complex conditional logic
-const processPayment = (amount, paymentMethod, user) => {
+export const processPayment = (amount: number, paymentMethod: string, user: User): PaymentResult => {
 	// Validate amount
 	if (typeof amount !== 'number' || amount <= 0) {
 		throw new Error('Invalid amount');
@@ -112,7 +158,7 @@ const processPayment = (amount, paymentMethod, user) => {
 };
 
 // Function with array methods and callbacks
-const processNumbers = (numbers) => {
+export const processNumbers = (numbers: any[]): ProcessNumbersResult => {
 	if (!Array.isArray(numbers)) {
 		throw new Error('Input must be an array');
 	}
@@ -131,14 +177,14 @@ const processNumbers = (numbers) => {
 };
 
 // Function with object destructuring and complex logic
-const createUserProfile = (userData) => {
+export const createUserProfile = (userData: User & { preferences?: UserPreferences }): UserProfile => {
 	const { name, email, age, preferences = {} } = userData;
 	
 	if (!name || !email || !age) {
 		throw new Error('Name, email, and age are required');
 	}
 	
-	const profile = {
+	const profile: UserProfile = {
 		id: Date.now().toString(),
 		name: name.trim(),
 		email: email.toLowerCase(),
@@ -167,7 +213,7 @@ const createUserProfile = (userData) => {
 };
 
 // Function with switch statement
-const getDayName = (dayNumber) => {
+export const getDayName = (dayNumber: number): string => {
 	if (typeof dayNumber !== 'number') {
 		throw new Error('Day number must be a number');
 	}
@@ -197,7 +243,7 @@ const getDayName = (dayNumber) => {
 };
 
 // Function with try-catch and async-like patterns
-const safeExecute = (fn, fallback) => {
+export const safeExecute = <T>(fn: () => T, fallback: T): T => {
 	if (typeof fn !== 'function') {
 		throw new Error('First argument must be a function');
 	}
@@ -210,15 +256,3 @@ const safeExecute = (fn, fallback) => {
 		return fallback;
 	}
 };
-
-module.exports = {
-	multiply,
-	divide,
-	gradeCalculator,
-	validateUser,
-	processPayment,
-	processNumbers,
-	createUserProfile,
-	getDayName,
-	safeExecute
-}; 

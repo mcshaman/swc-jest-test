@@ -1,4 +1,4 @@
-const { calculator } = require("./index");
+import { calculator } from "./index";
 
 describe("calculator", () => {
 	describe("addition", () => {
@@ -70,23 +70,20 @@ describe("calculator", () => {
 
 	describe("error handling", () => {
 		test("should throw error for non-numeric first argument", () => {
-			// @ts-ignore
-			expect(() => calculator("2", 3, "add")).toThrow("Both arguments must be numbers");
+			expect(() => calculator("2" as any, 3, "add")).toThrow("Both arguments must be numbers");
 		});
 
 		test("should throw error for non-numeric second argument", () => {
-			// @ts-ignore
-			expect(() => calculator(2, "3", "add")).toThrow("Both arguments must be numbers");
+			expect(() => calculator(2, "3" as any, "add")).toThrow("Both arguments must be numbers");
 		});
 
 		test("should throw error for missing operation", () => {
-			// @ts-ignore
+			// @ts-expect-error - Testing invalid input
 			expect(() => calculator(2, 3)).toThrow("Operation must be a string");
 		});
 
 		test("should throw error for non-string operation", () => {
-			// @ts-ignore
-			expect(() => calculator(2, 3, 123)).toThrow("Operation must be a string");
+			expect(() => calculator(2, 3, 123 as any)).toThrow("Operation must be a string");
 		});
 
 		test("should throw error for invalid operation", () => {
@@ -95,4 +92,4 @@ describe("calculator", () => {
 			);
 		});
 	});
-});
+}); 

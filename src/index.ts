@@ -1,11 +1,13 @@
+type Operation = "add" | "subtract" | "multiply" | "divide";
+
 /**
  * Simple calculator function that performs basic math operations
- * @param {number} a - First number
- * @param {number} b - Second number
- * @param {string} operation - Operation to perform ('add', 'subtract', 'multiply', 'divide')
- * @returns {number} - Result of the operation
+ * @param a - First number
+ * @param b - Second number
+ * @param operation - Operation to perform
+ * @returns Result of the operation
  */
-function calculator(a, b, operation) {
+export function calculator(a: number, b: number, operation: string): number {
 	// Input validation
 	if (typeof a !== "number" || typeof b !== "number") {
 		throw new Error("Both arguments must be numbers");
@@ -15,7 +17,7 @@ function calculator(a, b, operation) {
 		throw new Error("Operation must be a string");
 	}
 
-	switch (operation.toLowerCase()) {
+	switch (operation.toLowerCase() as Operation) {
 		case "add":
 			return a + b;
 		case "subtract":
@@ -34,10 +36,10 @@ function calculator(a, b, operation) {
 
 /**
  * Function to check if a number is even
- * @param {number} num - Number to check
- * @returns {boolean} - True if number is even, false otherwise
+ * @param num - Number to check
+ * @returns True if number is even, false otherwise
  */
-function isEven(num) {
+export function isEven(num: number): boolean {
 	if (typeof num !== "number") {
 		throw new Error("Input must be a number");
 	}
@@ -46,18 +48,12 @@ function isEven(num) {
 
 /**
  * Function to reverse a string
- * @param {string} str - String to reverse
- * @returns {string} - Reversed string
+ * @param str - String to reverse
+ * @returns Reversed string
  */
-function reverseString(str) {
+export function reverseString(str: string): string {
 	if (typeof str !== "string") {
 		throw new Error("Input must be a string");
 	}
 	return str.split("").reverse().join("");
 }
-
-module.exports = {
-	calculator,
-	isEven,
-	reverseString,
-};

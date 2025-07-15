@@ -6,8 +6,12 @@
 		"test:coverage": "jest --coverage"
 	},
 	"devDependencies": {
+		"@babel/preset-env": "^7.24.0",
+		"@babel/preset-typescript": "^7.24.0",
 		"@types/jest": "^30.0.0",
+		"babel-jest": "^29.7.0",
 		"jest": "^30.0.4",
-		"prettier": "^3.6.2"
+		"prettier": "^3.6.2",
+		"typescript": "^5.3.0"
 	}
 }

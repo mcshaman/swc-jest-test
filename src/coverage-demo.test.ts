@@ -1,4 +1,4 @@
-const {
+import {
 	multiply,
 	divide,
 	gradeCalculator,
@@ -8,7 +8,7 @@ const {
 	createUserProfile,
 	getDayName,
 	safeExecute
-} = require('./coverage-demo');
+} from './coverage-demo';
 
 describe('multiply', () => {
 	test('should multiply two positive numbers', () => {
@@ -52,7 +52,7 @@ describe('validateUser', () => {
 });
 
 describe('processPayment', () => {
-	const authenticatedUser = { isAuthenticated: true };
+	const authenticatedUser = { name: 'John', email: 'john@example.com', age: 25, isAuthenticated: true };
 
 	test('should process credit card payment successfully', () => {
 		const result = processPayment(500, 'credit', authenticatedUser);
@@ -120,7 +120,7 @@ describe('safeExecute', () => {
 	});
 
 	test('should throw error for non-function first argument', () => {
-		expect(() => safeExecute('not a function', 'fallback'))
+		expect(() => safeExecute('not a function' as any, 'fallback'))
 			.toThrow('First argument must be a function');
 	});
 }); 
